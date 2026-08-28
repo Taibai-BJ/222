@@ -1,0 +1,399 @@
+<title>贝觅宣贯会</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --bg: #F2F6FC;
+    --ink: #0B1B33;
+    --muted: #5B6B82;
+    --line: #DFE7F2;
+    --accent: #1E7BFF;
+    --cyan: #00C2E0;
+    --glass: rgba(255,255,255,0.72);
+    --glass-strong: rgba(255,255,255,0.9);
+    --mono: "SF Mono", "Menlo", "Consolas", "Liberation Mono", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    background-image:
+      linear-gradient(rgba(30,123,255,0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(30,123,255,0.045) 1px, transparent 1px);
+    background-size: 44px 44px;
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--accent); color: #fff; }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 40px); }
+  section { padding: clamp(40px, 6vw, 68px) 0; }
+  .rule { border: 0; border-top: 1px solid var(--line); }
+
+  .k {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .k::before { content: ""; width: 20px; height: 2px; background: var(--accent); border-radius: 2px; }
+  .k .k-dot { color: var(--muted); }
+
+  h2.title { font-size: clamp(23px, 3.2vw, 32px); font-weight: 800; letter-spacing: -0.01em; line-height: 1.2; text-wrap: balance; }
+  .lede { color: var(--muted); font-size: 15.5px; max-width: 60ch; margin-top: 12px; }
+  .accent { color: var(--accent); }
+
+  /* —— glass card —— */
+  .glass {
+    background: var(--glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 0 8px 28px rgba(11,27,51,0.06);
+  }
+
+  /* —— nav —— */
+  nav {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(242,246,252,0.7);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 58px; }
+  .brand { display: flex; align-items: baseline; gap: 10px; }
+  .brand .en { font-weight: 800; font-size: 20px; letter-spacing: -0.02em; }
+  .brand .zh { font-size: 13px; color: var(--muted); letter-spacing: 0.06em; }
+  .nav-status { font-family: var(--mono); font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+  .nav-cta {
+    font-size: 13px; color: #fff; background: var(--accent);
+    text-decoration: none; padding: 8px 16px; border-radius: 8px; font-weight: 600;
+    box-shadow: 0 4px 14px rgba(30,123,255,0.28);
+  }
+  .nav-cta:hover { background: #0F6AE0; }
+
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--cyan);
+    box-shadow: 0 0 0 0 rgba(0,194,224,0.5);
+    animation: pulse 2.2s ease-out infinite; flex: none;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0,194,224,0.5); }
+    70% { box-shadow: 0 0 0 8px rgba(0,194,224,0); }
+    100% { box-shadow: 0 0 0 0 rgba(0,194,224,0); }
+  }
+
+  /* —— hero —— */
+  .hero { padding: clamp(40px, 6vw, 72px) 0; position: relative; }
+  .hero::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(600px 300px at 78% 0%, rgba(30,123,255,0.14), transparent 60%),
+      radial-gradient(500px 260px at 20% 40%, rgba(0,194,224,0.10), transparent 60%);
+  }
+  .hero .wrap { position: relative; display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(28px, 4vw, 56px); align-items: center; }
+  .eyebrow { font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 18px; }
+  .hero h1 {
+    font-size: clamp(40px, 8vw, 78px);
+    font-weight: 800; letter-spacing: -0.03em; line-height: 1.04;
+  }
+  .hero h1 .grad {
+    background: linear-gradient(92deg, #0F6AE0 0%, #1E7BFF 40%, #00C2E0 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero-sub { margin-top: 18px; font-size: 16.5px; color: var(--muted); max-width: 44ch; }
+  .hero-sub strong { color: var(--ink); font-weight: 700; }
+  .cta-row { margin-top: 26px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; text-decoration: none; padding: 12px 26px; border-radius: 8px;
+    font-size: 15px; font-weight: 700; letter-spacing: 0.01em; border: 1px solid transparent;
+  }
+  .btn.primary { background: var(--accent); color: #fff; box-shadow: 0 6px 18px rgba(30,123,255,0.3); }
+  .btn.primary:hover { background: #0F6AE0; }
+  .btn.ghost { background: transparent; color: var(--accent); border-color: var(--line); }
+  .btn.ghost:hover { border-color: var(--accent); }
+
+  /* device card */
+  .device { padding: 22px 24px; }
+  .device-top { display: flex; align-items: center; justify-content: space-between; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+  .device-top .live { display: flex; align-items: center; gap: 8px; color: var(--ink); }
+  .device-top .live b { color: var(--cyan); font-weight: 600; }
+  .wave { margin: 22px 0 18px; display: flex; flex-direction: column; gap: 6px; }
+  .wave-row { display: flex; align-items: center; gap: 3px; height: 40px; }
+  .wave-row.mirror { opacity: 0.32; }
+  .wave-row.mirror .bar { background: linear-gradient(180deg, var(--accent), var(--cyan)); }
+  .bar {
+    flex: 1; min-width: 2px; height: 40%;
+    background: linear-gradient(180deg, #0F6AE0, #00C2E0);
+    border-radius: 2px;
+    animation: breathe 1.6s ease-in-out infinite alternate;
+    transform-origin: center;
+  }
+  .wave-row.mirror .bar { animation-direction: alternate-reverse; }
+  @keyframes breathe { from { transform: scaleY(0.4); } to { transform: scaleY(1); } }
+  .device-divider { border: 0; border-top: 1px dashed var(--line); margin: 14px 0; }
+  .device-q { font-size: 13.5px; color: var(--muted); }
+  .device-q b { color: var(--ink); font-weight: 700; }
+  .device-q .rep { color: var(--accent); }
+
+  /* —— pains —— */
+  .pains { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .pain { padding: 22px 22px; }
+  .pain .n { font-family: var(--mono); color: var(--accent); font-size: 11.5px; letter-spacing: 0.1em; }
+  .pain h3 { font-size: 17px; font-weight: 700; margin: 10px 0 8px; }
+  .pain p { color: var(--muted); font-size: 14px; }
+
+  /* —— what —— */
+  .what-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(26px, 4vw, 48px); align-items: start; }
+  .asks { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .ask { padding: 14px 16px; font-size: 14.5px; display: flex; gap: 12px; align-items: baseline; }
+  .ask .q { font-family: var(--mono); color: var(--accent); font-size: 11.5px; flex: none; }
+
+  /* —— lock —— */
+  .lock {
+    background: linear-gradient(120deg, #0F1E38 0%, #123A6B 55%, #0A4E63 100%);
+    color: #fff; border-radius: 16px; padding: clamp(28px, 4vw, 46px);
+    position: relative; overflow: hidden;
+  }
+  .lock::after {
+    content: ""; position: absolute; right: -40px; top: -40px; width: 220px; height: 220px;
+    background: radial-gradient(circle, rgba(0,194,224,0.35), transparent 65%); pointer-events: none;
+  }
+  .lock .k { color: #6FD3EA; }
+  .lock .k::before { background: #6FD3EA; }
+  .lock h2 { font-size: clamp(26px, 4vw, 40px); }
+  .lock p { color: #C9D9EC; font-size: 15.5px; max-width: 62ch; margin-top: 14px; }
+  .lock .big { color: #fff; font-weight: 700; }
+
+  /* —— stages —— */
+  .stages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .stage { padding: 24px 24px; position: relative; overflow: hidden; }
+  .stage .n { font-family: var(--mono); font-size: 26px; font-weight: 700; background: linear-gradient(120deg, var(--accent), var(--cyan)); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1; }
+  .stage h3 { font-size: 16.5px; font-weight: 700; margin: 12px 0 8px; }
+  .stage p { color: var(--muted); font-size: 13.5px; }
+
+  /* —— table —— */
+  .table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--glass-strong); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 540px; }
+  th, td { text-align: left; padding: 13px 18px; border-bottom: 1px solid var(--line); }
+  thead th {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); background: #EDF3FB; font-weight: 600;
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  tbody tr:hover td { background: #F4F8FE; }
+  td .do { color: var(--ink); font-weight: 700; }
+  td .pay { font-family: var(--mono); color: var(--accent); font-size: 13.5px; }
+  td .when { color: var(--muted); font-size: 13px; }
+  .rules { margin-top: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .rule-card { padding: 18px 20px; }
+  .rule-card h4 { font-size: 14.5px; font-weight: 700; margin-bottom: 6px; }
+  .rule-card h4 span { font-family: var(--mono); color: var(--accent); font-size: 11px; margin-right: 8px; }
+  .rule-card p { color: var(--muted); font-size: 13.5px; }
+
+  /* —— signup —— */
+  .signup { text-align: center; }
+  .signup h2 { font-size: clamp(26px, 4vw, 40px); }
+  .signup .cta-row { margin-top: 26px; justify-content: center; }
+  .risk { margin-top: 20px; font-family: var(--mono); font-size: 12px; color: var(--muted); letter-spacing: 0.02em; }
+
+  footer { border-top: 1px solid var(--line); padding: 26px 0 40px; }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; }
+  footer .brand .en { font-size: 17px; }
+  footer .foot-status { font-family: var(--mono); font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+
+  @media (max-width: 780px) {
+    .hero .wrap { grid-template-columns: 1fr; }
+    .pains, .stages, .what-grid, .rules { grid-template-columns: 1fr; }
+    .nav-status { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .dot, .bar { animation: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+
+<nav>
+  <div class="wrap">
+    <div class="brand"><span class="en">Beme</span><span class="zh">贝觅 · 数字分身</span></div>
+    <div class="nav-status"><span class="dot"></span> 随时在线</div>
+    <a class="nav-cta" href="#signup">现在认领</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">贝觅 BEME · 数字分身</div>
+      <h1>另一个我，<br><span class="grad">随时在线</span></h1>
+      <p class="hero-sub"><strong>记住你说过的每句话</strong>，替你写纪要、回消息、查历史——你的私人数字分身。先锁单，再开发。</p>
+      <div class="cta-row">
+        <a class="btn primary" href="#signup">现在认领</a>
+        <a class="btn ghost" href="#what">先看它怎么工作</a>
+      </div>
+    </div>
+
+    <div class="device glass">
+      <div class="device-top">
+        <span class="live"><span class="dot"></span><b>正在聆听</b></span>
+        <span>已运行 <span id="uptime">00:00:00</span></span>
+      </div>
+      <div class="wave">
+        <div class="wave-row" id="wave-a"></div>
+        <div class="wave-row mirror" id="wave-b"></div>
+      </div>
+      <hr class="device-divider">
+      <p class="device-q">你问「上次那个项目，我拍板了什么？」</p>
+      <p class="device-q">贝觅<span class="rep"> · 都在，随时在线</span></p>
+    </div>
+  </div>
+</header>
+
+<hr class="rule">
+
+<section id="what">
+  <div class="wrap">
+    <div class="k">01 <span class="k-dot">·</span> 它解决什么</div>
+    <h2 class="title">说过就忘的，贝觅替你记。</h2>
+    <p class="lede">你不是没脑子，是信息太多。贝觅把一天里重要的东西留下来。</p>
+    <div class="pains" style="margin-top: 26px;">
+      <div class="pain glass"><div class="n">A / 说过就忘</div><h3>决定转头就散</h3><p>会议多、消息多，重要的决定和承诺散在记录里找不回来。</p></div>
+      <div class="pain glass"><div class="n">B / 留不下来</div><h3>判断带不走</h3><p>下属带不走你的判断，笔记留不住你的原话，经验跟着人走。</p></div>
+      <div class="pain glass"><div class="n">C / 分身乏术</div><h3>时间被重复吃掉</h3><p>周报、纪要、回复，重复劳动吃掉你本该用来思考的时间。</p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section>
+  <div class="wrap">
+    <div class="what-grid">
+      <div>
+        <div class="k">02 <span class="k-dot">·</span> 它是什么</div>
+        <h2 class="title">贴在手机背面、跟着你的<span class="accent">第二记忆</span>。</h2>
+        <p class="lede">白天它跟着你记工作对话，回家连上 WiFi 自动上传，AI 整理成：今天的会说了啥、答应了谁什么、下周该催谁。它不替代你，只把判断和承诺沉淀成随时能问、随时能用的东西。</p>
+      </div>
+      <div class="asks">
+        <div class="ask glass"><span class="q">你问</span>上次那个项目，我拍板了什么？</div>
+        <div class="ask glass"><span class="q">你问</span>帮我写个周报。</div>
+        <div class="ask glass"><span class="q">你问</span>老张上个月答应我什么来着？</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section>
+  <div class="wrap">
+    <div class="lock">
+      <div class="k">03 <span class="k-dot">·</span> 怎么赚钱</div>
+      <h2>先锁单，再开发。</h2>
+      <p>单子锁够数，才投钱开发；不够，就不动。你的每一笔认购，都是「把它做出来」的启动单，也是判断这生意到底行不行的<span class="big">真金白银</span>。你不是在赌一个概念，你是在用订单投票。</p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section>
+  <div class="wrap">
+    <div class="k">04 <span class="k-dot">·</span> 三个阶段</div>
+    <h2 class="title">从听见，到认领，到开工。</h2>
+    <div class="stages" style="margin-top: 24px;">
+      <div class="stage glass"><div class="n">01</div><h3>内部宣贯</h3><p>我把思路框架讲给你听。今天不做决定，先把事情看清楚。</p></div>
+      <div class="stage glass"><div class="n">02</div><h3>意见反馈与认领</h3><p>一周到一个月内，你判断、你认领——出钱、锁单、给建议，做几样认几样。</p></div>
+      <div class="stage glass"><div class="n">03</div><h3>项目实施</h3><p>按各自认领的权利义务开始干。先锁单，再开发。</p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section>
+  <div class="wrap">
+    <div class="k">05 <span class="k-dot">·</span> 你做什么，拿什么</div>
+    <h2 class="title">贡献单价表。</h2>
+    <p class="lede">按你做的事计酬。一个人可以同时认领好几行——现金账叠加算，股权账单独定。</p>
+    <div class="table-scroll" style="margin-top: 22px;">
+      <table>
+        <thead><tr><th>你做的事</th><th>报酬</th><th>何时发</th></tr></thead>
+        <tbody>
+          <tr><td><span class="do">锁单（每拉一单）</span></td><td><span class="pay">¥____ 或 ____%</span></td><td><span class="when">客户回款后</span></td></tr>
+          <tr><td><span class="do">对公采购 / 分销返点</span></td><td><span class="pay">____%</span></td><td><span class="when">回款后（走对公）</span></td></tr>
+          <tr><td><span class="do">市场建议 / 引荐资源</span></td><td><span class="pay">顾问费 ¥____/次</span></td><td><span class="when">当期</span></td></tr>
+          <tr><td><span class="do">出钱（纯出资）</span></td><td><span class="pay">分红权 / 利息</span></td><td><span class="when">到期</span></td></tr>
+          <tr><td><span class="do">全职研发（方向定了再谈）</span></td><td><span class="pay">股权 + 工资</span></td><td><span class="when">分期成熟</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="rules">
+      <div class="rule-card glass"><h4><span>规则 1</span>现金账只认回款</h4><p>不认口头意向，钱到账才算数。出钱、锁单、给建议，做几样拿几样。</p></div>
+      <div class="rule-card glass"><h4><span>规则 2</span>股权账不叠加</h4><p>股权只按「谁是真正的主人」定，不按「干了几件事」叠加。</p></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="signup" class="signup">
+  <div class="wrap">
+    <div class="k" style="justify-content: center;"><span class="k-dot">·</span> 现在认领</div>
+    <h2>另一个我，随时在线。</h2>
+    <div class="cta-row">
+      <a class="btn primary" href="#">现在认领</a>
+      <a class="btn ghost" href="#">先看一页纸说明</a>
+    </div>
+    <p class="risk">贝觅在锁单时尚未开发，存在失败风险。认领前请确认你已了解并愿意承担此风险。</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand"><span class="en">Beme</span><span class="zh">贝觅 · 另一个我，随时在线</span></div>
+    <div class="foot-status"><span class="dot"></span> 随时在线</div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // uptime counter
+    var el = document.getElementById('uptime');
+    if (el) {
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var s = 0;
+      function pad(n) { return (n < 10 ? '0' : '') + n; }
+      function render() {
+        var h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
+        el.textContent = pad(h) + ':' + pad(m) + ':' + pad(sec);
+      }
+      if (reduced) { s = 8 * 3600 + 26 * 60 + 14; render(); }
+      else { render(); setInterval(function () { s++; render(); }, 1000); }
+    }
+    // waveform bars
+    function buildWave(id, count) {
+      var row = document.getElementById(id);
+      if (!row) return;
+      var frag = document.createDocumentFragment();
+      for (var i = 0; i < count; i++) {
+        var b = document.createElement('span');
+        b.className = 'bar';
+        b.style.animationDelay = (i * 0.07) + 's';
+        b.style.animationDuration = (1.1 + (i % 5) * 0.18) + 's';
+        var h = 35 + ((i * 37) % 60);
+        b.style.height = h + '%';
+        frag.appendChild(b);
+      }
+      row.appendChild(frag);
+    }
+    buildWave('wave-a', 26);
+    buildWave('wave-b', 26);
+  })();
+</script>
