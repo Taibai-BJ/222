@@ -76,6 +76,7 @@
     position: absolute;
     inset: 0;
     background: #0b0e12;
+    z-index: 0;
   }
   #map .leaflet-tile { filter: saturate(0.9) contrast(1.02); }
 
@@ -493,6 +494,14 @@
     transition: background 0.15s var(--ease-out), transform 0.1s var(--ease-out);
   }
   .lightbox .lb-close:active { background: var(--surface-2); transform: scale(0.94); }
+
+  /* ============ 层级修复：把 Leaflet 图层锁在地图内，按钮永远浮在地图之上 ============ */
+  #map { z-index: 1; isolation: isolate; }
+  header { z-index: 1000; }
+  .map-tools { z-index: 1000; }
+  .fab { z-index: 1010; }
+  .sheet { z-index: 1020; }
+  .map-hint { z-index: 1100; }
 </style>
 </head>
 <body>
