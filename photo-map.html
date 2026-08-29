@@ -827,7 +827,10 @@
     state.markers.forEach((m) => {
       const count = m.photos.length;
       const mk = L.marker([m.lat, m.lng], { icon: markerIcon(count, false) });
-      mk.bindPopup(markerPopupHTML(m));
+      mk.on("click", () => {
+        if (placingId) return; // 手动落点模式下，点击已有标注不打开预览
+        if (m.photos.length) openPreview(m.photos[0].id);
+      });
       mk.addTo(markerLayer);
     });
 
