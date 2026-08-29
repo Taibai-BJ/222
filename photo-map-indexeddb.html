@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>足迹地图 · Field Atlas</title>
+<title>龙珠球 · Field Atlas</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
 <style>
   /* ============ Design tokens ============ */
@@ -458,7 +458,7 @@
   <header>
     <div class="brand">
       <span class="mark"></span>
-      <h1>足迹地图</h1>
+      <h1>龙珠球</h1>
       <small>Field Atlas · 从照片读取 GPS 落点</small>
     </div>
     <div class="header-actions">
@@ -942,7 +942,7 @@
     const blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "足迹地图备份-" + new Date().toISOString().slice(0, 10) + ".json";
+    a.download = "龙珠球备份-" + new Date().toISOString().slice(0, 10) + ".json";
     a.click();
     URL.revokeObjectURL(a.href);
     toast("已导出备份");
